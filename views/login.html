@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../assets/img/Cosci_logo.png" rel="icon">
+    <link href="../assets/img/Cosci_logo.png" rel="apple-touch-icon">
+      <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body">
+<p></p>
+<a href="/home" class="btn btn-dark" role="button"  style="margin-left: 50px;" >กลับ</a>
+    <h1 style="margin-top:40px" align="center">ล็อคอิน</h1>
+    <form class="row g-3 needs-validation" novalidate action="/login" method="post">
+        <div class="col-12"  align="center" >
+          <label for="validationCustomUsername" class="form-label">Username</label>
+          <div class="input-group has-validation" style="width:300px">
+            <input type="text" class="form-control" name="username" id="username" aria-describedby="inputGroupPrepend" required>
+            <div class="invalid-feedback">
+              Username ไม่ถูกต้อง.
+            </div>
+          </div>
+        </div>
+        <div class="col-12"  align="center">
+            <label for="validationCustomPasswords" class="form-label">Password</label>
+            <div class="input-group has-validation" style="width:300px">
+              <input type="password" class="form-control" name="password" id="password" aria-describedby="inputGroupPrepend" required >
+              <div class="invalid-feedback">
+                Passwords ไม่ถูกต้อง.
+              </div>
+            </div>
+          </div>
+        
+        
+        
+        <div class="col-12"  align="center">
+          <button class="btn btn-primary" type="submit" value="LogIn">Submit form</button>
+
+        </div>
+      </form>
+      <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+      </script>
+        <!-- Vendor JS Files -->
+  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
