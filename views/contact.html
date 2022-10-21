@@ -149,7 +149,7 @@
                       <a
                         class="btn btn-primary btn-lg"
                         type="submit"
-                        onclick="saveMy()"
+                        onclick="saveLocal()"
                         href="/contact"
                       >
                         Submit
@@ -279,24 +279,16 @@
     ></a>
 
     <script>
-      function saveMy() {
+      function saveLocal() {
         var getProduct = [
           {
-            localNamw: document.getElementById("name").value,
+            localName: document.getElementById("name").value,
             localEmail: document.getElementById("email").value,
             localPhone: document.getElementById("phone").value,
             localMessage: document.getElementById("message").value,
           },
         ];
         localStorage.setItem("productList", JSON.stringify(getProduct));
-      }
-      function removeMy() {
-        document.getElementById("inputname").value = "";
-        localStorage.removeItem(" LocalproductName");
-
-        document.getElementById("inputprice").value = "";
-        localStorage.removeItem(" localPrice");
-        localStorage.clear();
       }
     </script>
 
