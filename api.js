@@ -1,17 +1,18 @@
-const express = require('express')
-const app = express()
-const sessions = require('express-session');
-const path = require('path')
+const mysql = require('mysql');
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const path = require('path');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'nodejs_login_midterm_2022'
+});
 
 
-const oneDay = 1000 * 60 * 60 * 24;
-app.use(sessions({
-    secret: 'folk',
-    saveUninitialized: true,
-    cookie: { maxAge: oneDay },
-    resave: false
-}));
-
+const app = express();
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static(__dirname+'/views'));
@@ -20,14 +21,13 @@ app.use(express.static(__dirname));
 app.set('views', path.join(__dirname, '/views'))
 
 
+app.use(session({
+    secret: 'folky',
+    resave: true,
+    saveUninitialized: true
+})
+);
 
-const myusername = 'admin'
-const mypassword = 'Web999'
-const myusername2 = 'commu'
-const mypassword2 = 'Cosci7749'
-
-// a variable to save a session
-var session;
 
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
@@ -47,43 +47,76 @@ app.get('/contact', (req, res) => {
     res.sendFile(__dirname + '/views/contact.html');
 })
 
-app.get('/login', (req, res) => {
-    session = req.session;
-    if (session.userid) {
-        res.redirect('/courses')
-    } else{
-        res.sendFile(__dirname + '/views/login.html');
-    }
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/views/register.html');
+})
 
+app.post('/register', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const post={
+        username: username,
+        password: password,
+    };
+
+    connection.query("INSERT INTO accounts SET ?", post, (err)=>{
+        console.log('Data Inserted');
+        return res.redirect('/courses');
+    });
+
+});
+
+app.get('/login', (req, res) => {
+    if(req.session.loggedin)
+    connection.query("SELECT * FROM accounts", (err, results) =>{
+        res.redirect('/courses');
+    });
+    else
+    res.sendFile(__dirname + '/views/login.html')
 })
 
 app.get('/courses', (req, res) => {
-    session = req.session;
-    if (session.userid) {
+    if(req.session.loggedin)
+    connection.query("SELECT * FROM accounts", (err, results) =>{
         res.sendFile(__dirname + '/views/courses.html');
-    } else{
-        res.redirect('/login')
-    }
+    });
+    else
+    res.redirect('/login');
 });
 
 
 
 app.post('/login', (req, res) => {
-    if (req.body.username == myusername && req.body.password == mypassword || req.body.username == myusername2 && req.body.password == mypassword2 ) {
-        session = req.session;
-        session.userid = req.body.username;
-        console.log(req.session)
-        res.redirect('/courses')
+    const username = req.body.username;
+    const password = req.body.password;
 
+    if (username && password) {
+        connection.query(
+            "SELECT * FROM accounts WHERE username = ? AND password = ?",
+            [username, password],
+            (err, results, fields) => {
+                if (results.length > 0) {
+                    req.session.loggedin = true;
+                    req.session.username = username;
+                    res.redirect('/courses');
+                } else {
+                    res.send('Incorrect Username and/or Password!');
+                }
+                res.end();
+            }
+        );
     } else {
-        res.redirect('/login')
+        res.redirect('/logout');
     }
 })
 
-app.get('/logout', (req, res) => {
-    req.session.destroy();
-    console.log(req.session)
-    res.redirect('/home');
+app.get("/logout", function(req, res) {
+    if (req.session.loggedin){
+    req.session.destroy(function (err) {  
+        res.redirect('/');
+          res.end();
+    });
+}
 });
 
 
