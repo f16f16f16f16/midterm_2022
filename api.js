@@ -19,6 +19,7 @@ app.use(express.static(__dirname+'/views'));
 app.use(express.static(__dirname));
 
 app.set('views', path.join(__dirname, '/views'))
+app.set('view engine', 'ejs')
 
 
 app.use(session({
@@ -30,21 +31,61 @@ app.use(session({
 
 
 app.get('/home', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+    if (req.session.loggedin) {
+        res.render('index.ejs',{isLogIn: true})
+    } else{
+        res.render('index.ejs',{isLogIn: false})
+    }
 })
 
 app.get('/', (req, res) => {
     res.redirect('/home')
 })
 
+app.get('/crud', (req, res) =>{
+    if(req.session.loggedin)
+    connection.query("SELECT * FROM accounts", (err, results) =>{
+        res.render("crud.ejs", {
+            posts: results
+        });
+        console.log(results);
+    });
+    else
+    return res.redirect('/courses');
+  });
+
+  app.get('/loginlog', (req, res) =>{
+    if(req.session.loggedin)
+    connection.query("SELECT * FROM extra", (err, results) =>{
+        res.render("loginlog.ejs", {
+            posts: results
+        });
+        console.log(results);
+    });
+    else
+    return res.redirect('/courses');
+  });
+
 app.get('/gallery', (req, res) => {
-    res.sendFile(__dirname + '/views/gallery.html');
+    if (req.session.loggedin) {
+        res.render('gallery.ejs',{isLogIn: true})
+    } else{
+        res.render('gallery.ejs',{isLogIn: false})
+    }
 })
 app.get('/staff', (req, res) => {
-    res.sendFile(__dirname + '/views/staffs.html');
+    if (req.session.loggedin) {
+        res.render('staffs.ejs',{isLogIn: true})
+    } else{
+        res.render('staffs.ejs',{isLogIn: false})
+    }
 })
 app.get('/contact', (req, res) => {
-    res.sendFile(__dirname + '/views/contact.html');
+    if (req.session.loggedin) {
+        res.render('contact.ejs',{isLogIn: true})
+    } else{
+        res.render('contact.ejs',{isLogIn: false})
+    }
 })
 
 app.get('/register', (req, res) => {
@@ -58,10 +99,9 @@ app.post('/register', (req, res) => {
         username: username,
         password: password,
     };
-
     connection.query("INSERT INTO accounts SET ?", post, (err)=>{
         console.log('Data Inserted');
-        return res.redirect('/courses');
+        return res.redirect('/crud');
     });
 
 });
@@ -78,7 +118,7 @@ app.get('/login', (req, res) => {
 app.get('/courses', (req, res) => {
     if(req.session.loggedin)
     connection.query("SELECT * FROM accounts", (err, results) =>{
-        res.sendFile(__dirname + '/views/courses.html');
+        res.render('courses.ejs',{isLogIn: true})
     });
     else
     res.redirect('/login');
@@ -89,6 +129,8 @@ app.get('/courses', (req, res) => {
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    const sql = `INSERT INTO extra (id, count, time) VALUES ("${username}", +1, CURRENT_TIMESTAMP);`
+    
 
     if (username && password) {
         connection.query(
@@ -98,9 +140,10 @@ app.post('/login', (req, res) => {
                 if (results.length > 0) {
                     req.session.loggedin = true;
                     req.session.username = username;
+                    connection.query(sql);
                     res.redirect('/courses');
                 } else {
-                    res.send('Incorrect Username and/or Password!');
+                    res.redirect('/login');
                 }
                 res.end();
             }
@@ -108,7 +151,49 @@ app.post('/login', (req, res) => {
     } else {
         res.redirect('/logout');
     }
-})
+});
+
+app.get('/edit/:id', (req, res) => {
+    const edit_postID = req.params.id;
+
+    connection.query(
+        "SELECT * FROM accounts WHERE id=?", 
+        [edit_postID],
+        (err, results) => {
+            if (results) {
+                res.render('edit', {
+                    post: results[0],
+                });
+            }
+        }
+    );
+});
+app.post('/edit/:id', (req, res) => {
+    const update_username = req.body.username;
+
+    const update_password = req.body.password;
+    const id = req.params.id;
+    connection.query(
+        "UPDATE accounts SET username = ?,password = ? WHERE id = ?",
+        [update_username, update_password, id],
+        (err, results) => {
+            if (results.changedRows === 1) {
+                console.log("Post Updated");
+            }
+            return res.redirect('/crud');
+        }
+    );
+});
+
+app.get('/delete/:id', (req, res) => {
+    connection.query(
+        "DELETE FROM accounts WHERE id = ?",
+        [req.params.id],
+        (err, results) => {
+            return res.redirect('/crud');
+        }
+    );
+});
 
 app.get("/logout", function(req, res) {
     if (req.session.loggedin){

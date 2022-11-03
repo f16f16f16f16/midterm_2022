@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Webboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="text-left">
+        <a href="/crud" class="btn btn-dark" role="button">กลับ</a>
+        <span class="text-right"><a href="/logout"  style="margin-left: 950px;" class="btn btn-danger">Sign Out</a></span>
+        
+    </div>
+    <hr>
+    <h1>-ตารางแสดงประวัติ Login-</h1>    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col-4">Username</th>
+                <th scope="col-4">Count</th>
+                <th scope="col-4">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+       
+           <% for(var i=0; i < posts.length; i++) { %>
+           <tr>
+               <td><%= posts[i].id %></td>
+               <td><%= posts[i].count %></td>
+               <td><%= posts[i].time %></td>
+           </tr>
+           <% } %>
+            
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

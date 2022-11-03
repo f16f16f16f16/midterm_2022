@@ -49,139 +49,101 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a href="/home">Home</a></li>
-          <li><a href="/gallery">About</a></li>
-          <li><a class="active" href="/login">Courses</a></li>
+          <li><a class="active" href="/gallery">Gallery</a></li>
+          <li><a href="/login">Courses</a></li>
           <li><a href="/staff">Staffs</a></li>
+          <li><a href="/crud">CRUD</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="/login" class="get-started-btn">Get Started</a>
+      <% if (isLogIn) { %>
+        <li class="nav-item" style="list-style-type: none">
+          <a href="/logout" class="get-started-btn">Logout</a>
+        </li>
+      <% } else { %>
+        <li class="nav-item" style="list-style-type: none">
+          <a href="/login" class="get-started-btn">LogIn</a>
+        </li>
+      <% } %>
 
     </div>
   </header><!-- End Header -->
 
-  <main id="main" data-aos="fade-in">
+  <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
+    <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>Courses</h2>
-        <p>ดูข้อมูลหลักสูตร และ Download</p>
+        <h2>Gallery</h2>
+        <p style="font-size: 16px;">แสดงกิจกรรมของนิสิตต่างๆ ของนิสิต Cosci </p>
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Courses Section ======= -->
-    <section id="courses" class="courses">
+    <!-- ======= Events Section ======= -->
+    <section id="events" class="events">
       <div class="container" data-aos="fade-up">
 
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="course-item">
-              <img src="../assets/img/Cosci_courses_1.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>BACHELOR OF ARTS PROGRAM IN SOCIAL COMMUNICATION INNOVATION</h4>
-                </div>
-
-                <h3><a href="course-details.html">หลักสูตรศิลปศาสตรบัณฑิต (นวัตกรรมสื่อสารสังคม) หลักสูตรปรับปรุง พ.ศ. 2565</a></h3>
-                <p> - วิชาเอกการออกแบบสื่อปฏิสัมพันธ์และมัลติมีเดีย
-                  <br>
-                  - วิชาเอกการจัดการธุรกิจไซเบอร์
-                  <br>
-                  - วิชาเอกนวัตกรรมคอมพิวเตอร์เพื่อการสื่อสาร</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="../assets/img/staffs/trainer-1.jpg" class="img-fluid" alt="">
-                    <div align="center"><a class="btn btn-success" role="button" href="../assets/courses/1.pdf"
-                      download="">
-                      ดาวโหลดข้อมูลหลักสูตร
-                   </a></div>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;50
-                    &nbsp;&nbsp;
-                    <i class="bx bx-heart"></i>&nbsp;65
-                  </div>
-                </div>
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-img">
+                <img src="../assets/img/cosci_event_1.jpeg" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">คณาจารย์และ นักเรียน โรงเรียนศรีธรรมราชศึกษา
+                  จากจังหวัดนครนครศรีธรรมราช</a></h5>
+                <p class="fst-italic text-center">วันที่ 20 ตุลาคม 2565</p>
+                <p class="card-text">ได้เข้ามาเยี่ยมชม และรับฟังบรรยาย เพื่อศึกษาเรียนรู้เพื่อสร้างแรงบันดาลใจในการศึกษาต่อระดับปริญญาตรีอย่างมีคุณภาพ โดย คณาจารย์วิทยาลัยนวัตกรรมสื่อสารสังคม มศว</p>
               </div>
             </div>
-          </div> <!-- End Course Item-->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="course-item">
-              <img src="../assets/img/Cosci_courses_2.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>BACHELOR OF ARTS PROGRAM IN CINEMA AND DIGITAL MEDIA</h4>
-                </div>
-
-                <h3><a href="course-details.html">หลักสูตรศิลปศาสตรบัณฑิต (ภาพยนตร์และสื่อดิจิทัล) หลักสูตรปรับปรุง พ.ศ. 2565</a></h3>
-                <p>- วิชาเอกการผลิตภาพยนตร์และสื่อดิจิทัล
-                  <br>
-                  - วิชาเอกการแสดงและกำกับการแสดงภาพยนตร์
-                  <br>
-                  - วิชาเอกการออกแบบเพื่องานภาพยนตร์และสื่อดิจิทัล
-                  <br>
-                  - วิชาเอกการจัดการภาพยนตร์และสื่อดิจิทัล</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="../assets/img/staffs/trainer-2.jpg" class="img-fluid" alt="">
-                    <div align="center"><a class="btn btn-success" role="button" href="../assets/courses/2.pdf"
-                      download="">
-                      ดาวโหลดข้อมูลหลักสูตร
-                   </a></div>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;35
-                    &nbsp;&nbsp;
-                    <i class="bx bx-heart"></i>&nbsp;42
-                  </div>
-                </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-img">
+                <img src="../assets/img/cosci_event_2.jpeg" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">Bangkok Design Week 2023</a></h5>
+                <p class="fst-italic text-center">วันที่ 17 ตุลาคม 2565</p>
+                <p class="card-text">นิสิตวิชาเอกการสื่อสารเพื่อการจัดการนวัตกรรม ชั้นปีที่ 3 รายวิชา Design Studio 
+                  วิทยาลัยนวัตกรรมสื่อสารสังคม มศว ลงพื้นที่ร่วมทำworkshop กับSatarana และMayday ภายใต้ความร่วมมือกับวิทยาลัยนวัตกรรมสื่อสารสังคม ลงพื้นที่ ณ ย่านเยาวราช ย่านถนนแปลงนาม ย่านถนนทรงวาด ย่านสำเพ็ง และย่านวงเวียนโอเดียน เพื่อพัฒนาข้อมูลสู่การออกแบบระบบป้ายสัญลักษณ์ “เยาวลิงค์” เชื่อมต่อเรื่องราวที่น่าสนใจของเยาวราช ซึ่งผลงานการสร้างสรรค์จะถูกนำไปติดตั้งจริง และเป็นส่วนหนึ่งของเทศกาล Bangkok Design week 2023 : Bangkok Trooper : เยาวราชสร้างเมือง เมืองสร้างสรรค์ ระหว่างวันที่ 4-12 กพ 2566</p>
               </div>
             </div>
-          </div> <!-- End Course Item-->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="course-item">
-              <img src="../assets/img/Cosci_courses_3.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>BACHELOR OF ARTS PROGRAM IN SOCIAL COMMUNICATION INNOVATION</h4>
-                </div>
-
-                <h3><a href="course-details.html">หลักสูตรศิลปศาสตรบัณฑิต (นวัตกรรมการสื่อสาร) หลักสูตรปรับปรุง พ.ศ. 2564</a></h3>
-                <p>- วิชาเอกการสื่อสารเพื่อการท่องเที่ยว
-                  <br>
-                  - วิชาเอกการสื่อสารเพื่อสุขภาพ
-                  <br>
-                  - วิชาเอกการสื่อสารเพื่อการจัดการนวัตกรรม
-                  <br>
-                  - วิชาเอกการสื่อสารเพื่อเศรษฐศาสตร์</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="../assets/img/staffs/trainer-3.jpg" class="img-fluid" alt="">
-                    <div align="center"><a class="btn btn-success" role="button" href="../assets/courses/3.pdf"
-                      download="">
-                      ดาวโหลดข้อมูลหลักสูตร
-                   </a></div>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;20
-                    &nbsp;&nbsp;
-                    <i class="bx bx-heart"></i>&nbsp;85
-                  </div>
-                </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-img">
+                <img src="../assets/img/cosci_event_3.jpeg" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">ลงพื้นที่...ศึกษา ทัศนศึกษา นอกสถานที่</a></h5>
+                <p class="fst-italic text-center">วันที่ 27 กันยายน 2565</p>
+                <p class="card-text">นิสิตชั้นปีที่ 3 วิชาเอกการสื่อสารเพื่อการท่องเที่ยว วิทยาลัยนวัตกรรมสื่อสารสังคม มศว เข้าร่วมเรียนรู้ แนวคิดความยั่งยืนผ่านกิจกรรมภายใน งาน Sustainability Expo 2022 ณ ศูนย์การประชุมแห่งชาติสิริกิติ์ </p>
               </div>
             </div>
-          </div> <!-- End Course Item-->
 
+          </div>
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-img">
+                <img src="../assets/img/cosci_event_4.jpeg" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">ลงพื้นที่ ทัศนศึกษา เกาะรัตนโกสินทร์</a></h5>
+                <p class="fst-italic text-center">วันที่ 22 กันยายน 2565</p>
+                <p class="card-text">นิสิต ปี1 วิชาเอกการสื่อสารเพื่อการท่องเที่ยว วิทยาลัยนวัตกรรมสื่อสารสังคม มศว ลงพื้นที่ ศึกษาภูมิปัญญาไทย ศิลปะวัฒนธรรม รอบเขตเมืองเก่า เกาะรัตนโกสินทร์ 
+                  เพื่อสร้างความรู้ ความเข้าใจเกี่ยวด้านข้อมูลและการท่องเที่ยว
+                  สร้างการเรียนรู้แบบบูรณาการ เข้าถึงแหล่งข้อมูลจากชุมชนและสถานที่จริง </p>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
-    </section><!-- End Courses Section -->
+    </section><!-- End Events Section -->
 
   </main><!-- End #main -->
 

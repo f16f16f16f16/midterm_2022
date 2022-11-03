@@ -60,13 +60,22 @@
             <li><a href="/gallery">Gallery</a></li>
             <li><a href="/login">Courses</a></li>
             <li><a href="/staff">Staffs</a></li>
+            <li><a href="/crud">CRUD</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
         <!-- .navbar -->
 
-        <a href="/login" class="get-started-btn">Get Started</a>
+        <% if (isLogIn) { %>
+          <li class="nav-item" style="list-style-type: none">
+            <a href="/logout" class="get-started-btn">Logout</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item" style="list-style-type: none">
+            <a href="/login" class="get-started-btn">LogIn</a>
+          </li>
+        <% } %>
       </div>
     </header>
     <!-- End Header -->
